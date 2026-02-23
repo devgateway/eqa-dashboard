@@ -34,18 +34,14 @@
     min-height: var(--topbar-height);
 }
 
-.sidebar-brand-icon {
-    width: 34px;
-    height: 34px;
-    background: var(--color-primary);
+.sidebar-brand-logo {
+    width: 36px;
+    height: 36px;
     border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--font-size-lg);
-    font-weight: 800;
-    color: #fff;
+    object-fit: contain;
     flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2px;
 }
 
 .sidebar-brand-text {
@@ -132,11 +128,11 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    font-size: 14px;
 }
 
-.nav-item .nav-icon svg {
-    width: 18px;
-    height: 18px;
+.nav-item .nav-icon i {
+    font-size: 14px;
 }
 
 .collapsed .nav-item span:not(.nav-icon) {
@@ -199,6 +195,7 @@
     justify-content: space-between;
     padding: 0 var(--space-6);
     z-index: 50;
+    transition: background var(--transition-base), border-color var(--transition-base);
 }
 
 .topbar-left {
@@ -230,6 +227,28 @@
     gap: var(--space-4);
 }
 
+/* ---- Theme Toggle ---- */
+.theme-toggle {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: var(--color-bg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    color: var(--color-text-secondary);
+    font-size: 16px;
+    border: none;
+}
+
+.theme-toggle:hover {
+    background: var(--color-border);
+    color: var(--color-primary);
+    transform: rotate(15deg);
+}
+
 .topbar-notif {
     position: relative;
     width: 36px;
@@ -241,6 +260,8 @@
     background: var(--color-bg);
     cursor: pointer;
     transition: background var(--transition-fast);
+    font-size: 16px;
+    color: var(--color-text-secondary);
 }
 
 .topbar-notif:hover {
@@ -319,13 +340,40 @@
     }
 }
 
+/* ---- App Footer ---- */
+.app-footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-3) var(--space-6);
+    transition: background var(--transition-base), border-color var(--transition-base);
+}
+
+.app-footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.app-footer-inner a {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.app-footer-inner a:hover {
+    text-decoration: underline;
+}
+
 /* ---- Cards ---- */
 .card {
     background: var(--color-surface);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--color-border);
-    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+    transition: box-shadow var(--transition-fast), transform var(--transition-fast), background var(--transition-base);
 }
 
 .card:hover {
@@ -405,6 +453,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 18px;
 }
 
 .kpi-card-icon.teal {
@@ -514,6 +563,10 @@
     transition: all var(--transition-fast);
     cursor: pointer;
     white-space: nowrap;
+}
+
+.btn i {
+    font-size: 0.85em;
 }
 
 .btn-primary {
@@ -627,6 +680,7 @@
     background: var(--color-surface);
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
     width: 100%;
+    color: var(--color-text);
 }
 
 .form-input:focus,
@@ -667,12 +721,12 @@
     border: none;
     background: none;
     font-size: var(--font-size-sm);
+    color: var(--color-text);
 }
 
-.search-bar svg {
+.search-bar i {
     color: var(--color-text-muted);
-    width: 16px;
-    height: 16px;
+    font-size: 14px;
 }
 
 /* ---- Score Visualization ---- */
@@ -836,9 +890,8 @@
     color: var(--color-text-secondary);
 }
 
-.empty-state svg {
-    width: 48px;
-    height: 48px;
+.empty-state i {
+    font-size: 48px;
     margin-bottom: var(--space-4);
     color: var(--color-text-muted);
 }

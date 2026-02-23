@@ -1,5 +1,5 @@
 import { Router } from './router.js';
-import { renderLayout, bindLayoutEvents } from './layout.js';
+import { renderLayout, bindLayoutEvents, initTheme } from './layout.js';
 import { LoginPage, bindLoginEvents } from './pages/login.js';
 import { CountyDashboard } from './pages/countyDashboard.js';
 import { SubCountyDashboard } from './pages/subCountyDashboard.js';
@@ -14,6 +14,9 @@ import { TrendsPage } from './pages/trends.js';
 import { SchoolDirectory, bindDirectoryEvents } from './pages/schools.js';
 import { ReportsPage } from './pages/reports.js';
 import { UsersPage } from './pages/users.js';
+
+// Apply saved theme preference
+initTheme();
 
 const routes = [
     { path: '/login', render: () => LoginPage(), bind: bindLoginEvents },
