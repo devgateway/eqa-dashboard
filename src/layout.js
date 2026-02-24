@@ -106,6 +106,7 @@ export function renderLayout(contentHTML, activeRoute) {
         <footer class="app-footer">
           <div class="app-footer-inner">
             <span>© 2026 Kajiado County — Education Quality Assurance Dashboard</span>
+            <span class="prototype-badge" style="display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; background: rgba(0,0,0,0.05); border-radius: var(--radius-full); font-weight: 600;"><i class="fa-solid fa-code-branch" style="font-size: 11px;"></i> Mockup/Prototype (version_2)</span>
             <span>Developed by <a href="https://developmentgateway.org" target="_blank" rel="noopener noreferrer">Development Gateway</a></span>
           </div>
         </footer>
