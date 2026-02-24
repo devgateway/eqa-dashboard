@@ -1,8 +1,8 @@
 import { Router } from './router.js';
 import { renderLayout, bindLayoutEvents, initTheme } from './layout.js';
 import { LoginPage, bindLoginEvents } from './pages/login.js';
-import { CountyDashboard } from './pages/countyDashboard.js';
-import { SubCountyDashboard } from './pages/subCountyDashboard.js';
+import { CountyDashboard, bindCountyEvents } from './pages/countyDashboard.js';
+import { SubCountyDashboard, bindSubCountyEvents } from './pages/subCountyDashboard.js';
 import { WardDashboard, bindWardEvents } from './pages/wardDashboard.js';
 import { SchoolProfile } from './pages/schoolProfile.js';
 import { AssessmentForm, bindAssessmentEvents } from './pages/assessment.js';
@@ -20,9 +20,11 @@ initTheme();
 
 const routes = [
     { path: '/login', render: () => LoginPage(), bind: bindLoginEvents },
-    { path: '/dashboard/county', render: () => CountyDashboard() },
-    { path: '/dashboard/subcounty', render: () => SubCountyDashboard() },
-    { path: '/dashboard/ward', render: () => WardDashboard(), bind: bindWardEvents },
+    { path: '/dashboard/county', render: () => CountyDashboard(), bind: bindCountyEvents },
+    { path: '/dashboard/subcounty', render: () => SubCountyDashboard(), bind: bindSubCountyEvents }, // Default
+    { path: '/dashboard/subcounty/:name', render: (p) => SubCountyDashboard(p), bind: bindSubCountyEvents },
+    { path: '/dashboard/ward', render: () => WardDashboard(), bind: bindWardEvents }, // Default
+    { path: '/dashboard/ward/:name', render: (p) => WardDashboard(p), bind: bindWardEvents },
     { path: '/school/:id', render: (p) => SchoolProfile(p) },
     { path: '/assessment/new', render: () => AssessmentForm(), bind: bindAssessmentEvents },
     { path: '/inspections', render: () => InspectionsPage() },

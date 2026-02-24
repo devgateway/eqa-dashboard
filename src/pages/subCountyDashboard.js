@@ -1,27 +1,45 @@
 import { icons } from '../icons.js';
 import { mockData } from '../data.js';
+import { navigateTo } from '../router.js';
 
-export function SubCountyDashboard() {
-    const d = mockData;
-    const heatmapRows = d.subCounties.map(sc => {
-        const t = sc.compliance + Math.floor(Math.random() * 6) - 3;
-        const i = sc.compliance - Math.floor(Math.random() * 8);
-        const w = sc.compliance + Math.floor(Math.random() * 10) - 2;
-        const g = sc.compliance - Math.floor(Math.random() * 5);
-        const p = sc.compliance + Math.floor(Math.random() * 4) - 1;
-        const hc = v => v >= 75 ? 'heatmap-high' : v >= 60 ? 'heatmap-mid' : 'heatmap-low';
-        return `<tr>
-      <td><strong>${sc.name}</strong></td>
+export function SubCountyDashboard(params = {}) {
+  const d = mockData;
+  const subCountyName = params && params.name ? decodeURIComponent(params.name) : 'Kajiado North';
+
+  // In a real app, you'd filter full data. Here we have a predefined list of wards for Kajiado North, 
+  // but we can generate them dynamically or use the mockData.wards for the selected subcounty
+  const scData = d.subCounties.find(sc => sc.name === subCountyName) || d.subCounties[0];
+
+  // Normally you'd filter Wards here based on the SubCounty.
+  // For mock purposes, if it's not Kajiado North, we'll just fake some wards.
+  const wards = subCountyName === 'Kajiado North'
+    ? d.wards
+    : Array.from({ length: scData.wards }).map((_, i) => ({
+      name: `${subCountyName.replace('Kajiado ', '')} Ward ${i + 1}`,
+      schools: Math.floor(scData.schools / scData.wards),
+      compliance: scData.compliance + Math.floor(Math.random() * 10) - 5,
+      pending: Math.floor(Math.random() * 5)
+    }));
+
+  const heatmapRows = wards.map(w => {
+    const t = w.compliance + Math.floor(Math.random() * 6) - 3;
+    const i = w.compliance - Math.floor(Math.random() * 8);
+    const wd = w.compliance + Math.floor(Math.random() * 10) - 2;
+    const g = w.compliance - Math.floor(Math.random() * 5);
+    const p = w.compliance + Math.floor(Math.random() * 4) - 1;
+    const hc = v => v >= 75 ? 'heatmap-high' : v >= 60 ? 'heatmap-mid' : 'heatmap-low';
+    return `<tr class="ward-row" data-name="${w.name}" style="cursor: pointer;">
+      <td><strong>${w.name}</strong></td>
       <td><span class="heatmap-cell ${hc(t)}">${t}%</span></td>
       <td><span class="heatmap-cell ${hc(i)}">${i}%</span></td>
-      <td><span class="heatmap-cell ${hc(w)}">${w}%</span></td>
+      <td><span class="heatmap-cell ${hc(wd)}">${wd}%</span></td>
       <td><span class="heatmap-cell ${hc(g)}">${g}%</span></td>
       <td><span class="heatmap-cell ${hc(p)}">${p}%</span></td>
-      <td><span class="font-semibold">${sc.compliance}%</span></td>
+      <td><span class="font-semibold">${w.compliance}%</span></td>
     </tr>`;
-    }).join('');
+  }).join('');
 
-    const compBars = d.subCounties.map(sc => `
+  const compBars = d.subCounties.map(sc => `
     <div class="bar-group">
       <div class="bar" style="height:${sc.compliance * 2}px; background:${sc.compliance >= 75 ? '#22c55e' : sc.compliance >= 60 ? '#f59e0b' : '#ef4444'}">
         <div class="bar-value">${sc.compliance}%</div>
@@ -30,11 +48,11 @@ export function SubCountyDashboard() {
     </div>
   `).join('');
 
-    return `
+  return `
     <div class="page-header">
       <div>
-        <h1>Sub-County View</h1>
-        <div class="subtitle">Comparative analysis across administrative wards</div>
+        <h1>Sub-County View: ${subCountyName}</h1>
+        <div class="subtitle">Ward-level analysis and compliance tracking</div>
       </div>
       <div class="flex gap-3">
         <select class="form-select" style="width:auto">
@@ -53,23 +71,23 @@ export function SubCountyDashboard() {
     <div class="kpi-grid">
       <div class="kpi-card teal">
         <div class="kpi-card-icon teal">${icons.mapPin}</div>
-        <div class="kpi-card-label">Sub-Counties</div>
-        <div class="kpi-card-value">5</div>
+        <div class="kpi-card-label">Total Wards</div>
+        <div class="kpi-card-value">${scData.wards}</div>
       </div>
       <div class="kpi-card blue">
         <div class="kpi-card-icon blue">${icons.school}</div>
         <div class="kpi-card-label">Total Schools</div>
-        <div class="kpi-card-value">847</div>
+        <div class="kpi-card-value">${scData.schools}</div>
       </div>
       <div class="kpi-card green">
         <div class="kpi-card-icon green">${icons.checkCircle}</div>
-        <div class="kpi-card-label">Above 70% Compliance</div>
-        <div class="kpi-card-value">4</div>
+        <div class="kpi-card-label">Avg. Compliance</div>
+        <div class="kpi-card-value">${scData.compliance}%</div>
       </div>
-      <div class="kpi-card red">
-        <div class="kpi-card-icon red">${icons.alertTriangle}</div>
-        <div class="kpi-card-label">Below Threshold</div>
-        <div class="kpi-card-value">1</div>
+      <div class="kpi-card amber">
+        <div class="kpi-card-icon amber">${icons.clipboard}</div>
+        <div class="kpi-card-label">Total Inspections</div>
+        <div class="kpi-card-value">${scData.inspections}</div>
       </div>
     </div>
 
@@ -112,7 +130,9 @@ export function SubCountyDashboard() {
           <table class="data-table">
             <thead>
               <tr>
-                <th>Sub-County</th>
+            <thead>
+              <tr>
+                <th>Ward</th>
                 <th>Teaching</th>
                 <th>Infrastructure</th>
                 <th>Welfare</th>
@@ -127,4 +147,12 @@ export function SubCountyDashboard() {
       </div>
     </div>
   `;
+}
+
+export function bindSubCountyEvents() {
+  document.querySelectorAll('.ward-row').forEach(row => {
+    row.addEventListener('click', () => {
+      navigateTo(`/dashboard/ward/${encodeURIComponent(row.dataset.name)}`);
+    });
+  });
 }

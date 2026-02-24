@@ -2,13 +2,17 @@ import { icons } from '../icons.js';
 import { mockData } from '../data.js';
 import { navigateTo } from '../router.js';
 
-export function WardDashboard() {
-    const d = mockData;
-    const wardSchools = d.schools.filter(s => s.subCounty === 'Kajiado North');
+export function WardDashboard(params = {}) {
+  const d = mockData;
+  const wardName = params && params.name ? decodeURIComponent(params.name) : 'Ngong';
 
-    const schoolRows = wardSchools.map(s => {
-        const statusClass = s.status === 'Approved' ? 'badge-success' : s.status === 'Conditionally Approved' ? 'badge-warning' : 'badge-danger';
-        return `<tr class="school-row" data-id="${s.id}">
+  // In a real app, this would query backend for all schools in the specified ward
+  // For mock testing, if there are no schools for a ward (e.g. mock missing Wards), we'll gracefully fallback or show empty states
+  const wardSchools = d.schools.filter(s => s.ward === wardName);
+
+  const schoolRows = wardSchools.map(s => {
+    const statusClass = s.status === 'Approved' ? 'badge-success' : s.status === 'Conditionally Approved' ? 'badge-warning' : 'badge-danger';
+    return `<tr class="school-row" data-id="${s.id}">
       <td><strong>${s.name}</strong><br/><span class="text-xs text-muted">${s.type} · ${s.ownership}</span></td>
       <td>${s.ward}</td>
       <td>
@@ -22,9 +26,9 @@ export function WardDashboard() {
       <td><span class="badge ${statusClass}">${s.status}</span></td>
       <td class="text-muted text-sm">${s.lastInspection}</td>
     </tr>`;
-    }).join('');
+  }).join('');
 
-    const timeline = d.recentActivity.slice(0, 5).map(a => `
+  const timeline = d.recentActivity.slice(0, 5).map(a => `
     <div class="activity-item">
       <div class="activity-dot" style="background:${a.color}"></div>
       <div class="activity-content">
@@ -34,11 +38,11 @@ export function WardDashboard() {
     </div>
   `).join('');
 
-    return `
+  return `
     <div class="page-header">
       <div>
-        <h1>Ward View</h1>
-        <div class="subtitle">Kajiado North — Ward-level monitoring</div>
+        <h1>Ward View: ${wardName}</h1>
+        <div class="subtitle">Ward-level monitoring and school performance</div>
       </div>
       <div class="flex gap-3">
         <select class="form-select" style="width:auto">
@@ -74,7 +78,7 @@ export function WardDashboard() {
     <div class="dashboard-grid">
       <div class="card">
         <div class="card-header">
-          <h3>Schools in Kajiado North</h3>
+          <h3>Schools in ${wardName}</h3>
           <div class="flex gap-2">
             <div class="search-bar" style="width:200px">
               ${icons.search}
@@ -93,7 +97,7 @@ export function WardDashboard() {
                 <th>Last Inspection</th>
               </tr>
             </thead>
-            <tbody>${schoolRows}</tbody>
+            <tbody>${schoolRows.length > 0 ? schoolRows : '<tr><td colspan="5" class="text-center text-muted">No schools found for this ward in mock data.</td></tr>'}</tbody>
           </table>
         </div>
       </div>
@@ -108,10 +112,10 @@ export function WardDashboard() {
 }
 
 export function bindWardEvents() {
-    document.querySelectorAll('.school-row').forEach(row => {
-        row.style.cursor = 'pointer';
-        row.addEventListener('click', () => {
-            navigateTo(`/school/${row.dataset.id}`);
-        });
+  document.querySelectorAll('.school-row').forEach(row => {
+    row.style.cursor = 'pointer';
+    row.addEventListener('click', () => {
+      navigateTo(`/school/${row.dataset.id}`);
     });
+  });
 }

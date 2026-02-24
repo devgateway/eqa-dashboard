@@ -1,9 +1,10 @@
 import { icons } from '../icons.js';
 import { mockData } from '../data.js';
+import { navigateTo } from '../router.js';
 
 export function CountyDashboard() {
-    const d = mockData;
-    const kpiCards = d.countyKPIs.map(k => `
+  const d = mockData;
+  const kpiCards = d.countyKPIs.map(k => `
     <div class="kpi-card ${k.color}">
       <div class="kpi-card-icon ${k.color}">${icons[k.icon]}</div>
       <div class="kpi-card-label">${k.label}</div>
@@ -14,7 +15,7 @@ export function CountyDashboard() {
     </div>
   `).join('');
 
-    const domainBars = d.domainScores.map(ds => `
+  const domainBars = d.domainScores.map(ds => `
     <div class="bar-group">
       <div class="bar" style="height:${ds.score * 1.8}px; background:${ds.color};">
         <div class="bar-value" style="color:${ds.color}">${ds.score}%</div>
@@ -23,7 +24,7 @@ export function CountyDashboard() {
     </div>
   `).join('');
 
-    const activityItems = d.recentActivity.map(a => `
+  const activityItems = d.recentActivity.map(a => `
     <div class="activity-item">
       <div class="activity-dot" style="background:${a.color}"></div>
       <div class="activity-content">
@@ -33,8 +34,8 @@ export function CountyDashboard() {
     </div>
   `).join('');
 
-    const subCountyRows = d.subCounties.map(sc => `
-    <tr>
+  const subCountyRows = d.subCounties.map(sc => `
+    <tr class="subcounty-row" data-name="${sc.name}" style="cursor: pointer;">
       <td><strong>${sc.name}</strong></td>
       <td>${sc.wards}</td>
       <td>${sc.schools}</td>
@@ -50,7 +51,7 @@ export function CountyDashboard() {
     </tr>
   `).join('');
 
-    return `
+  return `
     <div class="page-header">
       <div>
         <h1>County Dashboard</h1>
@@ -160,4 +161,12 @@ export function CountyDashboard() {
       </div>
     </div>
   `;
+}
+
+export function bindCountyEvents() {
+  document.querySelectorAll('.subcounty-row').forEach(row => {
+    row.addEventListener('click', () => {
+      navigateTo(`/dashboard/subcounty/${encodeURIComponent(row.dataset.name)}`);
+    });
+  });
 }
