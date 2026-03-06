@@ -2,16 +2,16 @@ import { icons } from '../icons.js';
 import { mockData } from '../data.js';
 
 export function CorrectiveActionsPage() {
-    const actions = mockData.correctiveActions;
-    const open = actions.filter(a => a.status === 'Open');
-    const inProgress = actions.filter(a => a.status === 'In Progress');
-    const resolved = actions.filter(a => a.status === 'Resolved');
+  const actions = mockData.correctiveActions;
+  const open = actions.filter(a => a.status === 'Open');
+  const inProgress = actions.filter(a => a.status === 'In Progress');
+  const resolved = actions.filter(a => a.status === 'Resolved');
 
-    const renderCard = (a) => {
-        const pc = a.priority === 'Critical' ? 'badge-danger' : a.priority === 'High' ? 'badge-warning' : 'badge-info';
-        const daysLeft = Math.max(0, Math.floor((new Date(a.deadline) - new Date('2026-02-23')) / 86400000));
-        const deadlineColor = daysLeft <= 7 ? 'var(--color-danger)' : daysLeft <= 14 ? 'var(--color-warning)' : 'var(--color-text-secondary)';
-        return `<div class="kanban-card">
+  const renderCard = (a) => {
+    const pc = a.priority === 'Critical' ? 'badge-danger' : a.priority === 'High' ? 'badge-warning' : 'badge-info';
+    const daysLeft = Math.max(0, Math.floor((new Date(a.deadline) - new Date('2026-02-23')) / 86400000));
+    const deadlineColor = daysLeft <= 7 ? 'var(--color-danger)' : daysLeft <= 14 ? 'var(--color-warning)' : 'var(--color-text-secondary)';
+    return `<div class="kanban-card">
       <div class="flex justify-between items-center" style="margin-bottom:var(--space-2)"><span class="text-xs text-muted">${a.id}</span><span class="badge ${pc}">${a.priority}</span></div>
       <h5>${a.issue}</h5>
       <p>${a.school} · ${a.category}</p>
@@ -20,14 +20,14 @@ export function CorrectiveActionsPage() {
         <span class="text-xs text-muted">${a.assignedTo}</span>
       </div>
     </div>`;
-    };
+  };
 
-    return `
+  return `
     <div class="page-header">
       <div><h1>Corrective Actions</h1><div class="subtitle">Recommendation-to-Resolution pipeline</div></div>
       <div class="flex gap-3">
         <select class="form-select" style="width:auto"><option>All Categories</option><option>Safety</option><option>Staffing</option><option>Sanitation</option><option>Infrastructure</option><option>Teaching</option></select>
-        <button class="btn btn-primary">${icons.plus} New Action</button>
+        <a href="#/actions/new" class="btn btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none">${icons.plus} New Action</a>
       </div>
     </div>
 

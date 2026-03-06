@@ -10,11 +10,11 @@ export const mockData = {
 
     // County-level KPIs
     countyKPIs: [
-        { label: 'Total Schools', value: '847', change: '+12', direction: 'up', color: 'teal', icon: 'school' },
-        { label: 'Inspections (This Term)', value: '342', change: '+28%', direction: 'up', color: 'blue', icon: 'clipboard' },
-        { label: 'Avg. Compliance Score', value: '74%', change: '+3.2%', direction: 'up', color: 'green', icon: 'checkCircle' },
-        { label: 'Pending Actions', value: '56', change: '-8', direction: 'down', color: 'amber', icon: 'alertTriangle' },
-        { label: 'Critical Flags', value: '14', change: '+2', direction: 'up', color: 'red', icon: 'shield' }
+        { label: 'Total Schools', value: '847', change: '+12', direction: 'up', color: 'teal', icon: 'school', link: '#/dashboard/school' },
+        { label: 'Inspections (This Term)', value: '342', change: '+28%', direction: 'up', color: 'blue', icon: 'clipboard', link: '#/inspections' },
+        { label: 'Avg. Compliance Score', value: '74%', change: '+3.2%', direction: 'up', color: 'green', icon: 'checkCircle', link: '#/trends' },
+        { label: 'Pending Actions', value: '56', change: '-8', direction: 'down', color: 'amber', icon: 'alertTriangle', link: '#/actions' },
+        { label: 'Critical Flags', value: '14', change: '+2', direction: 'up', color: 'red', icon: 'shield', link: '#/verification' }
     ],
 
     // Sub-counties

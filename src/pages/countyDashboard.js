@@ -5,14 +5,14 @@ import { navigateTo } from '../router.js';
 export function CountyDashboard() {
   const d = mockData;
   const kpiCards = d.countyKPIs.map(k => `
-    <div class="kpi-card ${k.color}">
+    <a href="${k.link}" class="kpi-card ${k.color}" style="text-decoration: none; color: inherit;">
       <div class="kpi-card-icon ${k.color}">${icons[k.icon]}</div>
       <div class="kpi-card-label">${k.label}</div>
       <div class="kpi-card-value">${k.value}</div>
       <div class="kpi-card-change ${k.direction === 'up' ? (k.color === 'red' ? 'down' : 'up') : 'down'}">
         ${k.direction === 'up' ? '↑' : '↓'} ${k.change} vs last term
       </div>
-    </div>
+    </a>
   `).join('');
 
   const domainBars = d.domainScores.map(ds => `

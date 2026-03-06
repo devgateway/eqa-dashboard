@@ -412,9 +412,14 @@
     overflow: hidden;
 }
 
-.kpi-card:hover {
+.kpi-card:hover,
+a.kpi-card:hover {
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
+}
+
+a.kpi-card {
+    cursor: pointer;
 }
 
 .kpi-card::before {

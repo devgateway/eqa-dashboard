@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Kajiado EQA Mobile</title>
+  <!-- Plus Jakarta Sans Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+
+<body>
+  <div class="phone-wrapper">
+    <div id="app">
+      <!-- App Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <img src="../county_logo.png" alt="Logo" class="county-logo">
+          <div class="header-titles">
+            <h1>Kajiado County</h1>
+            <h2>Inspections</h2>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+          <button class="icon-btn profile-btn"><i class="fa-regular fa-user"></i></button>
+        </div>
+      </header>
+
+      <!-- Main Content Area -->
+      <main class="app-content">
+
+        <!-- PAGE 1: Dashboard -->
+        <section id="page-dashboard" class="page active">
+
+          <!-- Sync Status Card -->
+          <div class="sync-card offline">
+            <div class="sync-header">
+              <span class="sync-label">Sync Status</span>
+            </div>
+            <div class="sync-body">
+              <div class="sync-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+              <div class="sync-text">
+                <h3>Currently Offline</h3>
+                <p>12 Pending Inspections</p>
+                <small>Wait for network to sync data.</small>
+              </div>
+              <button class="btn btn-outline" disabled>Sync Now</button>
+            </div>
+          </div>
+
+          <!-- Section Title -->
+          <h3 class="section-title">Pinned / Upcoming</h3>
+
+          <!-- Inspection List -->
+          <div class="inspection-list">
+            <!-- Card 1 -->
+            <div class="inspection-card">
+              <div class="card-header">
+                <h4>Maasai Academy - Primary</h4>
+                <span class="badge badge-warning"><i class="fa-solid fa-thumbtack"></i> Pinned</span>
+              </div>
+              <div class="card-body">
+                <p><i class="fa-solid fa-location-dot"></i> Kajiado Central</p>
+                <p><i class="fa-regular fa-clock"></i> Oct 28, 2026, 10:30 AM</p>
+                <p class="type-text">Type: Initial Assessment</p>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="inspection-card">
+              <div class="card-header">
+                <h4>Oloosirkon Secondary</h4>
+                <span class="badge badge-default">Upcoming</span>
+              </div>
+              <div class="card-body">
+                <p><i class="fa-solid fa-location-dot"></i> Kajiado East</p>
+                <p><i class="fa-regular fa-calendar"></i> Nov 1, 2026</p>
+                <p class="type-text">Type: Initial Assessment</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons Area -->
+          <div class="dashboard-actions">
+            <!-- Will open Wizard -->
+            <button class="btn btn-primary btn-large w-100" onclick="appNavigate('wizard')">
+              <i class="fa-solid fa-plus"></i> New Assessment
+            </button>
+          </div>
+        </section>
+
+        <!-- PAGE 2: Assessment Wizard -->
+        <section id="page-wizard" class="page">
+          <div class="wizard-header">
+            <button class="icon-btn" onclick="appNavigate('dashboard')"><i class="fa-solid fa-arrow-left"></i></button>
+            <div class="wizard-progress">
+              <p>Step 2 of 4: <strong>Infrastructure</strong></p>
+              <div class="progress-dots">
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizard-content">
+            <div class="wizard-title">
+              <h2>Infrastructure Assessment</h2>
+              <p>Provide feedback on the physical assets.</p>
+            </div>
+
+            <div class="form-group box-style">
+              <label>Road Condition</label>
+              <div class="scoring-group">
+                <button class="score-btn">0 = Poor</button>
+                <button class="score-btn selected">1 = Fair</button>
+                <button class="score-btn">2 = Good</button>
+              </div>
+            </div>
+
+            <div class="form-group box-style">
+              <label>Classroom Walls Integrity</label>
+              <div class="scoring-group">
+                <button class="score-btn">0 = Poor</button>
+                <button class="score-btn">1 = Fair</button>
+                <button class="score-btn selected">2 = Good</button>
+              </div>
+            </div>
+
+            <div class="form-group box-style">
+              <label>Sanitation Blocks (Toilets)</label>
+              <div class="scoring-group">
+                <button class="score-btn selected">0 = Poor</button>
+                <button class="score-btn">1 = Fair</button>
+                <button class="score-btn">2 = Good</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Photo Evidence</label>
+              <div class="photo-upload">
+                <i class="fa-solid fa-camera"></i>
+                <span>Add Photo Evidence</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>GPS Coordinates</label>
+              <div class="gps-field">
+                <i class="fa-solid fa-location-crosshairs"></i>
+                <div class="gps-text">
+                  <span>GPS Coordinates</span>
+                  <small>Tap to acquire location</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizard-footer">
+            <button class="btn btn-outline" onclick="appNavigate('dashboard')">Cancel</button>
+            <button class="btn btn-primary" onclick="appNavigate('dashboard')">Complete Step</button>
+          </div>
+        </section>
+
+        <!-- PAGE 3: Calendar -->
+        <section id="page-calendar" class="page">
+          <div class="calendar-header">
+            <h2>July 2026</h2>
+          </div>
+          <div class="calendar-slider">
+            <!-- Days -->
+            <div class="cal-day">
+              <span class="day-num">15</span>
+              <span class="day-name">Mo</span>
+            </div>
+            <div class="cal-day">
+              <span class="day-num">16</span>
+              <span class="day-name">Tu</span>
+            </div>
+            <div class="cal-day active">
+              <span class="day-num">17</span>
+              <span class="day-name">We</span>
+              <span class="dot-indicator"></span>
+            </div>
+            <div class="cal-day">
+              <span class="day-num">18</span>
+              <span class="day-name">Th</span>
+            </div>
+            <div class="cal-day">
+              <span class="day-num">19</span>
+              <span class="day-name">Fr</span>
+            </div>
+          </div>
+
+          <div class="schedule-list-header">
+            <h4>Scheduled Visits (Wednesday, July 17)</h4>
+            <span>3 Visits</span>
+          </div>
+
+          <div class="inspection-list">
+            <!-- Cal Card 1 -->
+            <div class="inspection-card status-completed">
+              <div class="card-header">
+                <h4>Ilbisil Secondary School</h4>
+                <span class="badge badge-success">Completed</span>
+              </div>
+              <div class="card-body">
+                <p><i class="fa-solid fa-location-dot"></i> Kajiado West</p>
+                <p><i class="fa-regular fa-clock"></i> 08:30 AM - 10:00 AM</p>
+              </div>
+            </div>
+
+            <!-- Cal Card 2 -->
+            <div class="inspection-card status-pending">
+              <div class="card-header">
+                <h4>Ngong Township Primary</h4>
+                <span class="badge badge-warning">Pending</span>
+              </div>
+              <div class="card-body">
+                <p><i class="fa-solid fa-location-dot"></i> Kajiado West</p>
+                <p><i class="fa-regular fa-clock"></i> 11:00 AM - 12:30 PM</p>
+              </div>
+            </div>
+
+            <!-- Cal Card 3 -->
+            <div class="inspection-card status-pending">
+              <div class="card-header">
+                <h4>Ole Tipis Girls High</h4>
+                <span class="badge badge-warning">Pending</span>
+              </div>
+              <div class="card-body">
+                <p><i class="fa-solid fa-location-dot"></i> Kajiado West</p>
+                <p><i class="fa-regular fa-clock"></i> 02:00 PM - 03:30 PM</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav">
+        <a href="#" class="nav-item active" onclick="appNavigate('dashboard'); return false;" data-target="dashboard">
+          <i class="fa-solid fa-grip-vertical"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" onclick="appNavigate('calendar'); return false;" data-target="calendar">
+          <i class="fa-regular fa-calendar-alt"></i>
+          <span>Calendar</span>
+        </a>
+        <a href="#" class="nav-item" onclick="alert('Reports demo not implemented in this prototype'); return false;">
+          <i class="fa-regular fa-file-lines"></i>
+          <span>Reports</span>
+        </a>
+        <a href="#" class="nav-item" onclick="alert('Settings demo not implemented in this prototype'); return false;">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+  <script type="module" src="./src/main.js"></script>
+  <script>
+    // Simple inline page navigation for the prototype
+    function appNavigate(pageId) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      // Show target page
+      document.getElementById('page-' + pageId).classList.add('active');
+
+      // Update nav items
+      document.querySelectorAll('.bottom-nav .nav-item').forEach(nav => {
+        nav.classList.remove('active');
+        if (nav.dataset.target === pageId) {
+          nav.classList.add('active');
+        }
+      });
+
+      // Hide app header and bottom nav if in wizard
+      const header = document.querySelector('.app-header');
+      const bottomNav = document.querySelector('.bottom-nav');
+      if (pageId === 'wizard') {
+        header.style.display = 'none';
+        bottomNav.style.display = 'none';
+      } else {
+        header.style.display = 'flex';
+        bottomNav.style.display = 'flex';
+      }
+    }
+
+    // Initialize scoring buttons interactivity in wizard
+    document.addEventListener('DOMContentLoaded', () => {
+      const scoreGroups = document.querySelectorAll('.scoring-group');
+      scoreGroups.forEach(group => {
+        const btns = group.querySelectorAll('.score-btn');
+        btns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            btns.forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+          });
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

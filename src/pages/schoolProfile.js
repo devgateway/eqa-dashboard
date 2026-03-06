@@ -2,13 +2,13 @@ import { icons } from '../icons.js';
 import { mockData } from '../data.js';
 
 export function SchoolProfile(params) {
-    const id = parseInt(params.id) || 1;
-    const s = mockData.schools.find(x => x.id === id) || mockData.schools[0];
-    const actions = mockData.correctiveActions.filter(a => a.school === s.name);
-    const statusClass = s.status === 'Approved' ? 'badge-success' : s.status === 'Conditionally Approved' ? 'badge-warning' : 'badge-danger';
-    const tt = s.enrollment.pp1.boys + s.enrollment.pp1.girls + s.enrollment.pp2.boys + s.enrollment.pp2.girls;
+  const id = parseInt(params.id) || 1;
+  const s = mockData.schools.find(x => x.id === id) || mockData.schools[0];
+  const actions = mockData.correctiveActions.filter(a => a.school === s.name);
+  const statusClass = s.status === 'Approved' ? 'badge-success' : s.status === 'Conditionally Approved' ? 'badge-warning' : 'badge-danger';
+  const tt = s.enrollment.pp1.boys + s.enrollment.pp1.girls + s.enrollment.pp2.boys + s.enrollment.pp2.girls;
 
-    return `
+  return `
     <div class="profile-header">
       <div class="profile-avatar">${s.name.charAt(0)}</div>
       <div class="profile-info">
@@ -21,15 +21,15 @@ export function SchoolProfile(params) {
       </div>
       <div class="flex gap-2">
         <button class="btn btn-secondary">${icons.download} Export</button>
-        <button class="btn btn-primary">${icons.clipboard} New Assessment</button>
+        <a href="#/assessment/new" class="btn btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none">${icons.clipboard} New Assessment</a>
       </div>
     </div>
 
     <div class="kpi-grid">
-      <div class="kpi-card teal"><div class="kpi-card-label">Overall Score</div><div class="kpi-card-value">${s.score}%</div><div class="kpi-card-change up">↑ +3% vs last</div></div>
-      <div class="kpi-card blue"><div class="kpi-card-label">Total Enrollment</div><div class="kpi-card-value">${tt}</div></div>
-      <div class="kpi-card amber"><div class="kpi-card-label">Pending Actions</div><div class="kpi-card-value">${actions.filter(a => a.status !== 'Resolved').length}</div></div>
-      <div class="kpi-card green"><div class="kpi-card-label">Last Inspection</div><div class="kpi-card-value" style="font-size:var(--font-size-xl)">${s.lastInspection}</div></div>
+      <a href="#/trends" class="kpi-card teal" style="text-decoration: none; color: inherit;"><div class="kpi-card-label">Overall Score</div><div class="kpi-card-value">${s.score}%</div><div class="kpi-card-change up">↑ +3% vs last</div></a>
+      <a href="#/dashboard/ward" class="kpi-card blue" style="text-decoration: none; color: inherit;"><div class="kpi-card-label">Total Enrollment</div><div class="kpi-card-value">${tt}</div></a>
+      <a href="#/actions" class="kpi-card amber" style="text-decoration: none; color: inherit;"><div class="kpi-card-label">Pending Actions</div><div class="kpi-card-value">${actions.filter(a => a.status !== 'Resolved').length}</div></a>
+      <a href="#/inspections" class="kpi-card green" style="text-decoration: none; color: inherit;"><div class="kpi-card-label">Last Inspection</div><div class="kpi-card-value" style="font-size:var(--font-size-xl)">${s.lastInspection}</div></a>
     </div>
 
     <div class="dashboard-grid-equal">
@@ -66,12 +66,12 @@ export function SchoolProfile(params) {
         <div class="card-header"><h3>Domain Scores</h3></div>
         <div class="card-body">
           ${mockData.domainScores.map(ds => {
-        const v = s.score + Math.floor(Math.random() * 20) - 10;
-        return `<div style="margin-bottom:var(--space-3)">
+    const v = s.score + Math.floor(Math.random() * 20) - 10;
+    return `<div style="margin-bottom:var(--space-3)">
               <div class="flex justify-between text-sm" style="margin-bottom:4px"><span class="font-medium">${ds.domain}</span><span class="font-semibold">${v}%</span></div>
               <div class="progress-bar"><div class="progress-bar-fill ${v >= 70 ? 'success' : v >= 50 ? 'warning' : 'danger'}" style="width:${v}%"></div></div>
             </div>`;
-    }).join('')}
+  }).join('')}
         </div>
       </div>
       <div class="card">
@@ -94,10 +94,10 @@ export function SchoolProfile(params) {
           <table class="data-table">
             <thead><tr><th>ID</th><th>Issue</th><th>Category</th><th>Priority</th><th>Status</th><th>Deadline</th></tr></thead>
             <tbody>${actions.map(a => {
-        const pc = a.priority === 'Critical' ? 'badge-danger' : a.priority === 'High' ? 'badge-warning' : 'badge-info';
-        const sc2 = a.status === 'Open' ? 'badge-danger' : a.status === 'In Progress' ? 'badge-warning' : 'badge-success';
-        return `<tr><td>${a.id}</td><td>${a.issue}</td><td>${a.category}</td><td><span class="badge ${pc}">${a.priority}</span></td><td><span class="badge ${sc2}">${a.status}</span></td><td>${a.deadline}</td></tr>`;
-    }).join('')}</tbody>
+    const pc = a.priority === 'Critical' ? 'badge-danger' : a.priority === 'High' ? 'badge-warning' : 'badge-info';
+    const sc2 = a.status === 'Open' ? 'badge-danger' : a.status === 'In Progress' ? 'badge-warning' : 'badge-success';
+    return `<tr><td>${a.id}</td><td>${a.issue}</td><td>${a.category}</td><td><span class="badge ${pc}">${a.priority}</span></td><td><span class="badge ${sc2}">${a.status}</span></td><td>${a.deadline}</td></tr>`;
+  }).join('')}</tbody>
           </table>
         </div>
       </div>

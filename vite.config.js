@@ -7,5 +7,13 @@ export default defineConfig({
   server: {
     port: 5173,
     open: false
+  },
+  build: {
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        mobile: 'mobile/index.html'
+      }
+    }
   }
 });
