@@ -244,6 +244,128 @@
           </div>
         </section>
 
+        <!-- PAGE 4: Reports -->
+        <section id="page-reports" class="page">
+          <div class="calendar-header">
+            <h2>Your Reports</h2>
+          </div>
+
+          <div class="sync-card">
+            <div class="sync-header">
+              <span class="sync-label">Weekly Activity</span>
+            </div>
+            <div
+              style="height: 120px; display: flex; align-items: flex-end; gap: var(--space-2); margin-top: var(--space-4);">
+              <!-- Fake Chart Bars -->
+              <div
+                style="flex: 1; background: var(--border-color); height: 40%; border-radius: var(--radius-sm) var(--radius-sm) 0 0;">
+              </div>
+              <div
+                style="flex: 1; background: var(--border-color); height: 70%; border-radius: var(--radius-sm) var(--radius-sm) 0 0;">
+              </div>
+              <div
+                style="flex: 1; background: var(--color-primary); height: 100%; border-radius: var(--radius-sm) var(--radius-sm) 0 0;">
+              </div>
+              <div
+                style="flex: 1; background: var(--border-color); height: 30%; border-radius: var(--radius-sm) var(--radius-sm) 0 0;">
+              </div>
+              <div
+                style="flex: 1; background: var(--border-color); height: 50%; border-radius: var(--radius-sm) var(--radius-sm) 0 0;">
+              </div>
+            </div>
+            <div
+              style="display: flex; justify-content: space-between; margin-top: var(--space-2); color: var(--text-muted); font-size: 0.75rem;">
+              <span>Mon</span><span>Tue</span><span
+                style="color: var(--color-primary); font-weight: bold;">Wed</span><span>Thu</span><span>Fri</span>
+            </div>
+          </div>
+
+          <h3 class="section-title">Latest Offline Syncs</h3>
+          <div class="inspection-list">
+            <div class="inspection-card status-completed">
+              <div class="card-header">
+                <h4>Database Synced</h4>
+                <span class="badge badge-success">Success</span>
+              </div>
+              <div class="card-body">
+                <p><i class="fa-solid fa-cloud-check"></i> 12 records uploaded</p>
+                <p><i class="fa-regular fa-clock"></i> Today, 09:15 AM</p>
+              </div>
+            </div>
+            <div class="inspection-card status-pending">
+              <div class="card-header">
+                <h4>Media Upload Failed</h4>
+                <span class="badge badge-warning">Retrying</span>
+              </div>
+              <div class="card-body">
+                <p><i class="fa-solid fa-image"></i> 3 photos pending Wi-Fi</p>
+                <p><i class="fa-regular fa-clock"></i> Yesterday, 04:30 PM</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PAGE 5: Settings -->
+        <section id="page-settings" class="page">
+          <div class="calendar-header" style="text-align: left; margin-bottom: var(--space-4);">
+            <h2>Settings</h2>
+          </div>
+
+          <div
+            style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-6); padding: var(--space-4); background: var(--bg-surface); border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+            <div
+              style="width: 60px; height: 60px; border-radius: var(--radius-full); background: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white;">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div>
+              <h3 style="margin-bottom: 2px;">Jackson Ole Lenku</h3>
+              <p style="color: var(--color-primary); font-size: 0.875rem; font-weight: 600;">Field Officer</p>
+            </div>
+          </div>
+
+          <div class="inspection-list">
+            <div class="inspection-card" style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h4 style="margin-bottom: 4px;">Auto-Sync Data</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Sync only on Wi-Fi connection</p>
+              </div>
+              <div
+                style="width: 44px; height: 24px; background: var(--color-primary); border-radius: 12px; position: relative;">
+                <div
+                  style="width: 20px; height: 20px; background: white; border-radius: 50%; position: absolute; right: 2px; top: 2px;">
+                </div>
+              </div>
+            </div>
+
+            <div class="inspection-card" style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h4 style="margin-bottom: 4px;">Dark Theme</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Toggle app appearance</p>
+              </div>
+              <div
+                style="width: 44px; height: 24px; background: var(--color-primary); border-radius: 12px; position: relative;">
+                <div
+                  style="width: 20px; height: 20px; background: white; border-radius: 50%; position: absolute; right: 2px; top: 2px;">
+                </div>
+              </div>
+            </div>
+
+            <div class="inspection-card"
+              style="display: flex; align-items: center; gap: var(--space-3); color: var(--color-danger); cursor: pointer;">
+              <i class="fa-solid fa-trash-can" style="font-size: 1.2rem;"></i>
+              <div>
+                <h4 style="color: inherit; margin-bottom: 4px;">Clear Local Data</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Delete cache & drafts</p>
+              </div>
+            </div>
+
+            <button class="btn w-100"
+              style="background: var(--bg-surface-elevated); color: var(--text-primary); margin-top: var(--space-4); border: 1px solid var(--border-color); padding: 1rem;">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+            </button>
+          </div>
+        </section>
+
       </main>
 
       <!-- Bottom Navigation -->
@@ -256,11 +378,11 @@
           <i class="fa-regular fa-calendar-alt"></i>
           <span>Calendar</span>
         </a>
-        <a href="#" class="nav-item" onclick="alert('Reports demo not implemented in this prototype'); return false;">
+        <a href="#" class="nav-item" onclick="appNavigate('reports'); return false;" data-target="reports">
           <i class="fa-regular fa-file-lines"></i>
           <span>Reports</span>
         </a>
-        <a href="#" class="nav-item" onclick="alert('Settings demo not implemented in this prototype'); return false;">
+        <a href="#" class="nav-item" onclick="appNavigate('settings'); return false;" data-target="settings">
           <i class="fa-solid fa-gear"></i>
           <span>Settings</span>
         </a>
