@@ -30,4 +30,5 @@ export const icons = {
     image: `<i class="fa-solid fa-image"></i>`,
     sun: `<i class="fa-solid fa-sun"></i>`,
     moon: `<i class="fa-solid fa-moon"></i>`,
+    layers: `<i class="fa-solid fa-layer-group"></i>`,
 };

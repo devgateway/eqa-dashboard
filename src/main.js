@@ -8,6 +8,7 @@ import { SchoolDashboard, bindSchoolDashboardEvents } from './pages/schoolDashbo
 import { SchoolProfile } from './pages/schoolProfile.js';
 import { AssessmentForm, bindAssessmentEvents } from './pages/assessment.js';
 import { InspectionsPage } from './pages/inspections.js';
+import { ValidationWorkflowPage } from './pages/validation.js';
 import { VerificationPage } from './pages/verification.js';
 import { AuditPage } from './pages/audit.js';
 import { CorrectiveActionsPage } from './pages/actions.js';
@@ -31,6 +32,7 @@ const routes = [
     { path: '/school/:id', render: (p) => SchoolProfile(p) },
     { path: '/assessment/new', render: () => AssessmentForm(), bind: bindAssessmentEvents },
     { path: '/inspections', render: () => InspectionsPage() },
+    { path: '/validation', render: () => ValidationWorkflowPage() },
     { path: '/verification', render: () => VerificationPage() },
     { path: '/audit', render: () => AuditPage() },
     { path: '/actions', render: () => CorrectiveActionsPage() },
