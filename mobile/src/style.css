@@ -543,6 +543,27 @@ body {
   color: var(--color-primary);
 }
 
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
 .photo-upload {
   border: 2px dashed var(--border-color);
   border-radius: var(--radius-lg);
